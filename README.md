@@ -39,7 +39,9 @@ JavaScript, HTML, CSS
 Link for game TBA
 
 # Stories:
-As a Player, I want to pick between six colours {red, blue, yellow, green, orange, purple} to form a four coloured code, the computer will provide up to four coloured pegs {white, black, none}, one for each of the colours submitted to provide an result.
+As a Player, I want to pick between six colours {red, blue, yellow, green, orange, purple} to form a four coloured code.
+
+As a Player, the computer will provide up to four coloured pegs {white, black, none}, after I selected a four coloured code.
 
 As a Player, I will see the different colour pegs, which will give me an indication of my guess aganist the secret code the computer has randomly generated.
 
