@@ -9,24 +9,66 @@
 </head>
 <body>
     <div class="container">
+        <div class ="top">
         <div class="heading">Mastermind</div>
         <button class="instructions">i</button>
+    </div>
         <div class="board">
             <div class="computer code">
-                <div class="secret code"></div>
-                <div class="secret code"></div>
-                <div class="secret code"></div>
-                <div class="secret code"></div>
+                <div class="secret-code" id="secret-code-1"></div>
+                <div class="secret-code" id="secret-code-2"></div>
+                <div class="secret-code" id="secret-code-3"></div>
+                <div class="secret-code" id="secret-code-4"></div>
             </div>
-            <div class="rows"></div>
-            <div class="guesses"></div>
-            <div class="pegs">
-                <div class="peg color" id="none"></div>
-                <div class="peg color" id="black"></div>
-                <div class="peg color" id="white"></div>
+            <div class="row-1">
+                <div class ="row-box">1</div>
+                <div class="attempt">
+                    <div class="guess" id="row1-guess1"></div>
+                    <div class="guess" id="row1-guess2"></div>
+                    <div class="guess" id="row1-guess3"></div>
+                    <div class="guess" id="row1-guess4"></div>
+                </div>
+                <div class="pegs">
+                    <div class="peg-color" id="none"></div>
+                    <div class="peg-color" id="black"></div>
+                    <div class="peg-color" id="white"></div>
+                </div>
             </div>
+            <div class="row-2">
+                <div class ="row-box">2</div>
+            </div>
+            <div class="row-3">
+                <div class ="row-box">3</div>
+            </div>
+            <div class="row-4">
+                <div class ="row-box">4</div>
+            </div>
+            <div class="row-5">
+                <div class ="row-box">5</div>
+            </div>
+            <div class="row-6">
+                <div class ="row-box">6</div>
+            </div>
+            <div class="row-7">
+                <div class ="row-box">7</div>
+            </div>
+            <div class="row-8">
+                <div class ="row-box">8</div>
+            </div>
+            <div class="row-9">
+                <div class ="row-box">9</div>
+            </div>
+            <div class="row-10">
+                <div class ="row-box">10</div>
+            </div>
+
+
+
+            
+            
         </div>
-         <div class="color buttons">
+        <footer>
+         <div class="color-buttons">
             <button class="color" id="red"></button>
             <button class="color" id="blue"></button>
             <button class="color" id="yellow"></button>
@@ -35,6 +77,7 @@
             <button class="color" id="purple"></button>
          </div>
          <button class="restart">Restart</button>
+        </footer>
     </div>
 </body>
 </html>
