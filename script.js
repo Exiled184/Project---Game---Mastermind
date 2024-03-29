@@ -40,7 +40,7 @@ const selectionCircles = row.getElementsByClassName("choice")
 
 
 
-selectionCircles[0].style.backgroundColor = "green"
+selectionCircles[0].style.backgroundColor = selectColor
 console.log(selectionCircles[1])
 console.log(selectionCircles[2])
 console.log(selectionCircles[3])
