@@ -3,7 +3,16 @@ const colors = ["red", "blue", "yellow", "green", "orange", "purple"]
 
 /*----- state variables -----*/
 let secretCode = generateSecretCode(colors)
-
+let selectionChoiceRow1 = [];
+let selectionChoiceRow2 = [];
+let selectionChoiceRow3 = [];
+let selectionChoiceRow4 = [];
+let selectionChoiceRow5 = [];
+let selectionChoiceRow6 = [];
+let selectionChoiceRow7 = [];
+let selectionChoiceRow8 = [];
+let selectionChoiceRow9 = [];
+let selectionChoiceRow10 = [];
 /*----- cached elements  -----*/
 
 
@@ -12,47 +21,67 @@ let secretCode = generateSecretCode(colors)
 
 /*----- functions -----*/
 
-window.onload = function() {
-// instructions();//
-// startGame()
-console.log("--->", secretCode)
+// initalisation
+window.onload = function () {
+	// instructions();//
+	// startGame()
+	console.log("--->", secretCode)
 }
+
 
 
 // initalising the game/secret code
-function generateSecretCode (colors){
-        const secretColor1= randomColor(colors);
-        const secretColor2= randomColor(colors);
-        const secretColor3= randomColor(colors);
-        const secretColor4= randomColor(colors);
-        return [secretColor1,secretColor2,secretColor3,secretColor4]
+function generateSecretCode(colors) {
+	const secretColor1 = randomColor(colors);
+	const secretColor2 = randomColor(colors);
+	const secretColor3 = randomColor(colors);
+	const secretColor4 = randomColor(colors);
+	return [secretColor1, secretColor2, secretColor3, secretColor4]
 }
 function randomColor(colors) {
-    const numberOfColors = colors.length;
-        const randomColorChoice = Math.floor(Math.random() * numberOfColors);
-        const generateSecretCode = colors[randomColorChoice];
-        return generateSecretCode
+	const numberOfColors = colors.length;
+	const randomColorChoice = Math.floor(Math.random() * numberOfColors);
+	const generateSecretCode = colors[randomColorChoice];
+	return generateSecretCode
 }
 
 // restart button
-document.querySelector(".restart").addEventListener("click",handleRestart);
+document.querySelector(".restart").addEventListener("click", handleRestart);
 
 function handleRestart() {
-    secretCode = generateSecretCode(colors);
-    console.log(secretCode)
+	secretCode = generateSecretCode(colors);
+	console.log(secretCode)
 }
 
 // clicking the colour buttons returns the colour
 const buttonSelector = document.querySelectorAll(".color-buttons > .color");
 
-buttonSelector.forEach(function(button) {
-    button.addEventListener("click", function() {
-        selectColor(button.id)  })
+buttonSelector.forEach(function (button) {
+	button.addEventListener("click", function () {
+		selectColor(button.id)
+	})
 })
 
-function selectColor(color){
-   console.log(color)
+// clicking the color buttons fills the arrays
+
+function isRowFull (array){
+	return array.length === 4; 
 }
+
+function selectColor(colors) {
+	if (selectionChoiceRow1.length < 5) {
+		selectionChoiceRow1.push(colors);
+	}
+	else {
+		selectionChoiceRow2.push(colors);
+	}
+}
+console.log(selectionChoiceRow1)
+console.log(selectionChoiceRow2)
+// code selection
+// const row = document.getElementById("row-1")
+// console.log(row)
+// const selectionCircles = row.getElementsByClassName("choice")
 
 // secret code
 // document.querySelector(".computer-code").classList.toggle("invisible");
@@ -66,10 +95,7 @@ function selectColor(color){
 
 
 
-// code selection
-const row = document.getElementById("row-1")
-console.log(row)
-const selectionCircles = row.getElementsByClassName("choice")
+
 
 
 
