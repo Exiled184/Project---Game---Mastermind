@@ -11,17 +11,17 @@ const orangeButton = document.querySelector("button.orange");
 const purpleButton = document.querySelector("button.purple");
 
 const boardState = [
-  { row_number: 1, guess: ["", "", "", ""], hint: ["", "", "", ""] },
-  { row_number: 2, guess: ["", "", "", ""], hint: ["", "", "", ""] },
-  { row_number: 3, guess: ["", "", "", ""], hint: ["", "", "", ""] },
-  { row_number: 4, guess: ["", "", "", ""], hint: ["", "", "", ""] },
-  { row_number: 5, guess: ["", "", "", ""], hint: ["", "", "", ""] },
-  { row_number: 6, guess: ["", "", "", ""], hint: ["", "", "", ""] },
-  { row_number: 7, guess: ["", "", "", ""], hint: ["", "", "", ""] },
-  { row_number: 8, guess: ["", "", "", ""], hint: ["", "", "", ""] },
-  { row_number: 9, guess: ["", "", "", ""], hint: ["", "", "", ""] },
-  { row_number: 10, guess: ["", "", "", ""], hint: ["", "", "", ""] },
-  { row_number: "", computerCode: ["", "", "", ""], hint: [""] },
+  { row_number: 1, choice: ["", "", "", ""], hint: ["", "", "", ""] },
+  { row_number: 2, choice: ["", "", "", ""], hint: ["", "", "", ""] },
+  { row_number: 3, choice: ["", "", "", ""], hint: ["", "", "", ""] },
+  { row_number: 4, choice: ["", "", "", ""], hint: ["", "", "", ""] },
+  { row_number: 5, choice: ["", "", "", ""], hint: ["", "", "", ""] },
+  { row_number: 6, choice: ["", "", "", ""], hint: ["", "", "", ""] },
+  { row_number: 7, choice: ["", "", "", ""], hint: ["", "", "", ""] },
+  { row_number: 8, choice: ["", "", "", ""], hint: ["", "", "", ""] },
+  { row_number: 9, choice: ["", "", "", ""], hint: ["", "", "", ""] },
+  { row_number: 10, choice: ["", "", "", ""], hint: ["", "", "", ""] },
+  { computerCode: ["", "", "", ""] },
 ];
 /*----- state variables -----*/
 let secretCode = generateSecretCode(colors);
@@ -74,19 +74,17 @@ function renderBoard(gameBoard) {
     computerCodeDiv.classList.add("computer-code");
     computerCodeContainer.append(computerCodeDiv);
 
-    row.guess.forEach(function (choice) {
+    for (let i = 0; i < 4; i++) {
       const choiceDiv = document.createElement("div");
-      if (choice) choiceDiv.classList.add(guess);
       choiceDiv.classList.add("choice");
       choiceContainer.append(choiceDiv);
-    });
+    }
 
-    row.hint.forEach(function (hint) {
+    for (let i = 0; i < 4; i++) {
       const hintDiv = document.createElement("div");
-      if (hint) hintDiv.classList.add(hint);
       hintDiv.classList.add("pegs");
       hintContainer.append(hintDiv);
-    });
+    }
 
     rowDiv.append(
       computerCodeContainer,
@@ -113,22 +111,22 @@ function addColor(color) {
 renderBoard(boardState);
 
 redButton.addEventListener("click", function () {
-  addColor("red");
+  addColor(".red");
 });
 blueButton.addEventListener("click", function () {
-  addColor("blue");
+  addColor(".blue");
 });
 yellowButton.addEventListener("click", function () {
-  addColor("yellow");
+  addColor(".yellow");
 });
 greenButton.addEventListener("click", function () {
-  addColor("green");
+  addColor(".green");
 });
 orangeButton.addEventListener("click", function () {
-  addColor("orange");
+  addColor(".orange");
 });
 purpleButton.addEventListener("click", function () {
-  addColor("purple");
+  addColor(".purple");
 });
 
 // initalisation
@@ -179,100 +177,100 @@ buttonSelector.forEach(function (button) {
 
 // clicking the color buttons fills the arrays
 
-function selectColor(color) {
-  if (selectionChoiceRow1.length < 4) {
-    selectionChoiceRow1.push(color);
-    const currentTile = document.querySelector(
-      "#guess-" + selectionChoiceRow1.length
-    );
-    currentTile.classList.add(color);
-    console.log("____>", "#guess-" + selectionChoiceRow1.length);
-  } else if (selectionChoiceRow2.length < 4) {
-    selectionChoiceRow2.push(color);
-    const currentTile = document.querySelector(
-      "#guess-" + (4 + selectionChoiceRow2.length)
-    );
-    currentTile.classList.add(color);
-  } else if (selectionChoiceRow3.length < 4) {
-    selectionChoiceRow3.push(color);
-    const currentTile = document.querySelector(
-      "#guess-" + (8 + selectionChoiceRow3.length)
-    );
-    currentTile.classList.add(color);
-  } else if (selectionChoiceRow4.length < 4) {
-    selectionChoiceRow4.push(color);
-    const currentTile = document.querySelector(
-      "#guess-" + (12 + selectionChoiceRow4.length)
-    );
-    currentTile.classList.add(color);
-  } else if (selectionChoiceRow5.length < 4) {
-    selectionChoiceRow5.push(color);
-    const currentTile = document.querySelector(
-      "#guess-" + (16 + selectionChoiceRow5.length)
-    );
-    currentTile.classList.add(color);
-  } else if (selectionChoiceRow6.length < 4) {
-    selectionChoiceRow6.push(color);
-    const currentTile = document.querySelector(
-      "#guess-" + (20 + selectionChoiceRow6.length)
-    );
-    currentTile.classList.add(color);
-  } else if (selectionChoiceRow7.length < 4) {
-    selectionChoiceRow7.push(color);
-    const currentTile = document.querySelector(
-      "#guess-" + (24 + selectionChoiceRow7.length)
-    );
-    currentTile.classList.add(color);
-  } else if (selectionChoiceRow8.length < 4) {
-    selectionChoiceRow8.push(color);
-    const currentTile = document.querySelector(
-      "#guess-" + (28 + selectionChoiceRow8.length)
-    );
-    currentTile.classList.add(color);
-  } else if (selectionChoiceRow9.length < 4) {
-    selectionChoiceRow9.push(color);
-    const currentTile = document.querySelector(
-      "#guess-" + (32 + selectionChoiceRow9.length)
-    );
-    currentTile.classList.add(color);
-  } else if (selectionChoiceRow10.length < 4) {
-    selectionChoiceRow10.push(color);
-    const currentTile = document.querySelector(
-      "#guess-" + (36 + selectionChoiceRow10.length)
-    );
-    currentTile.classList.add(color);
-  }
-  if (selectionChoiceRow1.length === 4) {
-    hints(hintColors);
-  }
-  if (selectionChoiceRow2.length === 4) {
-    hints(hintColors);
-  }
-  if (selectionChoiceRow3.length === 4) {
-    hints(hintColors);
-  }
-  if (selectionChoiceRow4.length === 4) {
-    hints(hintColors);
-  }
-  if (selectionChoiceRow5.length === 4) {
-    hints(hintColors);
-  }
-  if (selectionChoiceRow6.length === 4) {
-    hints(hintColors);
-  }
-  if (selectionChoiceRow7.length === 4) {
-    hints(hintColors);
-  }
-  if (selectionChoiceRow8.length === 4) {
-    hints(hintColors);
-  }
-  if (selectionChoiceRow9.length === 4) {
-    hints(hintColors);
-  }
-  if (selectionChoiceRow10.length === 4) {
-    hints(hintColors);
-  }
-}
+// function selectColor(color) {
+//   if (selectionChoiceRow1.length < 4) {
+//     selectionChoiceRow1.push(color);
+//     const currentTile = document.querySelector(
+//       "#guess-" + selectionChoiceRow1.length
+//     );
+//     currentTile.classList.add(color);
+//     console.log("____>", "#guess-" + selectionChoiceRow1.length);
+//   } else if (selectionChoiceRow2.length < 4) {
+//     selectionChoiceRow2.push(color);
+//     const currentTile = document.querySelector(
+//       "#guess-" + (4 + selectionChoiceRow2.length)
+//     );
+//     currentTile.classList.add(color);
+//   } else if (selectionChoiceRow3.length < 4) {
+//     selectionChoiceRow3.push(color);
+//     const currentTile = document.querySelector(
+//       "#guess-" + (8 + selectionChoiceRow3.length)
+//     );
+//     currentTile.classList.add(color);
+//   } else if (selectionChoiceRow4.length < 4) {
+//     selectionChoiceRow4.push(color);
+//     const currentTile = document.querySelector(
+//       "#guess-" + (12 + selectionChoiceRow4.length)
+//     );
+//     currentTile.classList.add(color);
+//   } else if (selectionChoiceRow5.length < 4) {
+//     selectionChoiceRow5.push(color);
+//     const currentTile = document.querySelector(
+//       "#guess-" + (16 + selectionChoiceRow5.length)
+//     );
+//     currentTile.classList.add(color);
+//   } else if (selectionChoiceRow6.length < 4) {
+//     selectionChoiceRow6.push(color);
+//     const currentTile = document.querySelector(
+//       "#guess-" + (20 + selectionChoiceRow6.length)
+//     );
+//     currentTile.classList.add(color);
+//   } else if (selectionChoiceRow7.length < 4) {
+//     selectionChoiceRow7.push(color);
+//     const currentTile = document.querySelector(
+//       "#guess-" + (24 + selectionChoiceRow7.length)
+//     );
+//     currentTile.classList.add(color);
+//   } else if (selectionChoiceRow8.length < 4) {
+//     selectionChoiceRow8.push(color);
+//     const currentTile = document.querySelector(
+//       "#guess-" + (28 + selectionChoiceRow8.length)
+//     );
+//     currentTile.classList.add(color);
+//   } else if (selectionChoiceRow9.length < 4) {
+//     selectionChoiceRow9.push(color);
+//     const currentTile = document.querySelector(
+//       "#guess-" + (32 + selectionChoiceRow9.length)
+//     );
+//     currentTile.classList.add(color);
+//   } else if (selectionChoiceRow10.length < 4) {
+//     selectionChoiceRow10.push(color);
+//     const currentTile = document.querySelector(
+//       "#guess-" + (36 + selectionChoiceRow10.length)
+//     );
+//     currentTile.classList.add(color);
+//   }
+//   if (selectionChoiceRow1.length === 4) {
+//     hints(hintColors);
+//   }
+//   if (selectionChoiceRow2.length === 4) {
+//     hints(hintColors);
+//   }
+//   if (selectionChoiceRow3.length === 4) {
+//     hints(hintColors);
+//   }
+//   if (selectionChoiceRow4.length === 4) {
+//     hints(hintColors);
+//   }
+//   if (selectionChoiceRow5.length === 4) {
+//     hints(hintColors);
+//   }
+//   if (selectionChoiceRow6.length === 4) {
+//     hints(hintColors);
+//   }
+//   if (selectionChoiceRow7.length === 4) {
+//     hints(hintColors);
+//   }
+//   if (selectionChoiceRow8.length === 4) {
+//     hints(hintColors);
+//   }
+//   if (selectionChoiceRow9.length === 4) {
+//     hints(hintColors);
+//   }
+//   if (selectionChoiceRow10.length === 4) {
+//     hints(hintColors);
+//   }
+// }
 
 // check hints
 // split up functions varible that looked for event, in the function - what was clicked - put a colour on the board, when four colours on the board
