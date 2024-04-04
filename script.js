@@ -1,6 +1,28 @@
 /*----- constants -----*/
 const colors = ["red", "blue", "yellow", "green", "orange", "purple"];
 const hintColors = ["grey", "white", "black"];
+const board = document.querySelector(".board");
+
+const redButton = document.querySelector("button.red");
+const blueButton = document.querySelector("button.blue");
+const yellowButton = document.querySelector("button.yellow");
+const greenButton = document.querySelector("button.green");
+const orangeButton = document.querySelector("button.orange");
+const purpleButton = document.querySelector("button.purple");
+
+const boardState = [
+  { row_number: 1, guess: ["", "", "", ""], hint: ["", "", "", ""] },
+  { row_number: 2, guess: ["", "", "", ""], hint: ["", "", "", ""] },
+  { row_number: 3, guess: ["", "", "", ""], hint: ["", "", "", ""] },
+  { row_number: 4, guess: ["", "", "", ""], hint: ["", "", "", ""] },
+  { row_number: 5, guess: ["", "", "", ""], hint: ["", "", "", ""] },
+  { row_number: 6, guess: ["", "", "", ""], hint: ["", "", "", ""] },
+  { row_number: 7, guess: ["", "", "", ""], hint: ["", "", "", ""] },
+  { row_number: 8, guess: ["", "", "", ""], hint: ["", "", "", ""] },
+  { row_number: 9, guess: ["", "", "", ""], hint: ["", "", "", ""] },
+  { row_number: 10, guess: ["", "", "", ""], hint: ["", "", "", ""] },
+  { row_number: "", computerCode: ["", "", "", ""], hint: [""] },
+];
 /*----- state variables -----*/
 let secretCode = generateSecretCode(colors);
 let selectionChoiceRow1 = [];
@@ -28,6 +50,86 @@ let hintRow10 = [];
 /*----- event listeners -----*/
 
 /*----- functions -----*/
+
+function renderBoard(gameBoard) {
+  board.innerHTML = "";
+  gameBoard.forEach(function (row) {
+    const rowDiv = document.createElement("div");
+    rowDiv.classList.add("row");
+
+    const rowNumberContainer = document.createElement("div");
+    const choiceContainer = document.createElement("div");
+    const hintContainer = document.createElement("div");
+    const computerCodeContainer = document.createElement("div");
+
+    choiceContainer.classList.add("selection");
+    hintContainer.classList.add("hint");
+    computerCodeContainer.classList.add("computer-code");
+
+    const rowNumberDiv = document.createElement("div");
+    rowNumberDiv.textContent = row.row_number;
+    rowNumberContainer.append(rowNumberDiv);
+
+    const computerCodeDiv = document.createElement("div");
+    computerCodeDiv.classList.add("computer-code");
+    computerCodeContainer.append(computerCodeDiv);
+
+    row.guess.forEach(function (choice) {
+      const choiceDiv = document.createElement("div");
+      if (choice) choiceDiv.classList.add(guess);
+      choiceDiv.classList.add("choice");
+      choiceContainer.append(choiceDiv);
+    });
+
+    row.hint.forEach(function (hint) {
+      const hintDiv = document.createElement("div");
+      if (hint) hintDiv.classList.add(hint);
+      hintDiv.classList.add("pegs");
+      hintContainer.append(hintDiv);
+    });
+
+    rowDiv.append(
+      computerCodeContainer,
+      rowNumberContainer,
+      choiceContainer,
+      hintContainer
+    );
+    board.append(rowDiv);
+  });
+}
+
+function addColor(color) {
+  for (const row of boardState) {
+    for (let i = 0; i < row.guess.length; i++) {
+      if (row.guess[i] === "") {
+        row.guess[i] = color;
+        renderBoard(boardState);
+        return;
+      }
+    }
+  }
+}
+
+renderBoard(boardState);
+
+redButton.addEventListener("click", function () {
+  addColor("red");
+});
+blueButton.addEventListener("click", function () {
+  addColor("blue");
+});
+yellowButton.addEventListener("click", function () {
+  addColor("yellow");
+});
+greenButton.addEventListener("click", function () {
+  addColor("green");
+});
+orangeButton.addEventListener("click", function () {
+  addColor("orange");
+});
+purpleButton.addEventListener("click", function () {
+  addColor("purple");
+});
 
 // initalisation
 window.onload = function () {
@@ -78,9 +180,6 @@ buttonSelector.forEach(function (button) {
 // clicking the color buttons fills the arrays
 
 function selectColor(color) {
-  if (selectionChoiceRow1.length === 4) {
-    hints(hintColors);
-  }
   if (selectionChoiceRow1.length < 4) {
     selectionChoiceRow1.push(color);
     const currentTile = document.querySelector(
@@ -143,36 +242,101 @@ function selectColor(color) {
     );
     currentTile.classList.add(color);
   }
+  if (selectionChoiceRow1.length === 4) {
+    hints(hintColors);
+  }
+  if (selectionChoiceRow2.length === 4) {
+    hints(hintColors);
+  }
+  if (selectionChoiceRow3.length === 4) {
+    hints(hintColors);
+  }
+  if (selectionChoiceRow4.length === 4) {
+    hints(hintColors);
+  }
+  if (selectionChoiceRow5.length === 4) {
+    hints(hintColors);
+  }
+  if (selectionChoiceRow6.length === 4) {
+    hints(hintColors);
+  }
+  if (selectionChoiceRow7.length === 4) {
+    hints(hintColors);
+  }
+  if (selectionChoiceRow8.length === 4) {
+    hints(hintColors);
+  }
+  if (selectionChoiceRow9.length === 4) {
+    hints(hintColors);
+  }
+  if (selectionChoiceRow10.length === 4) {
+    hints(hintColors);
+  }
 }
 
 // check hints
-function hints(hintColors) {
-  if (selectionChoiceRow1.length === 4) {
-    for (let i = 1; i <= selectionChoiceRow1.length; i++) {
-      const currentHint = document.getElementById("hint-" + i);
-      console.log(currentHint, "current Hint");
-      if (currentHint.id === "hint-1") {
-        selectionChoiceRow1.forEach(function (color, index) {
-          if (secretCode.includes(color, index)) {
-            currentHint.classList.add("black");
-          } else if (secretCode.includes(color, !index)) {
-            currentHint.classList.add("white");
-          }
-        });
-      }
-      // if (currentHint.id === "hint-2") {
-      //   selectionChoiceRow1.forEach(function(color,index){
-      // 	if (secretCode.indexOf(color)){
-      // 		currentHint.classList.add("black")
-      // 	}
-      //   })
-      // }
-      //   if (currentHint.id === "hint-3") {
-      //     currentHint.classList.add("black");
-      //   }
-      //   if (currentHint.id === "hint-4") {
-      //     currentHint.classList.add("black");
-      //   }
-    }
-  }
-}
+// split up functions varible that looked for event, in the function - what was clicked - put a colour on the board, when four colours on the board
+// 3 call back functions should be issues, check sequence, check color, check result
+// change variable
+
+// const spots = document.querySelector("#hint-");
+
+// const hints = function (event) {
+//   if (spots === 4) {
+//     checkSequence();
+//     checkColor();
+//     checkResult();
+//   }
+// };
+
+// function checkColor(hintColors) {
+//   if (spots.styles.backgroundColor === secretCode.styles.backgroundColor) {
+//     hintRow1.push(hintColors);
+//   }
+// }
+
+// function checkSequence() {
+// 	boardPosition[indexCounter].map(function(row1,index){
+// if(row1.style.backgroundColor === secretCode[index]){
+// 	resultSpot[indexCounter][index].style.backgroundColor;
+// }
+// 	})
+// }
+
+// function hints() {
+//   if (selectionChoiceRow1.length === 4) {
+//     for (let i = 1; i <= selectionChoiceRow1.length; i++) {
+//       const currentHint = document.getElementById("hint-" + i);
+//       console.log(
+//         getComputedStyle(currentHint).backgroundColor,
+//         "current Hint"
+//       );
+//       if ("guess-" + i === secretCode) {
+//         // console.log(currentHint, "--1--> current Hint");
+//         // console.log(secretCode, "--------> Secret code");
+//         currentHint.classList.add("black");
+//       } else {
+//         // console.log(currentHint, "-- 2 --- >current Hint");
+//         currentHint.classList.add("white");
+//         console.log(
+//           getComputedStyle(currentHint).backgroundColor,
+//           "current Hint"
+//         );
+//       }
+//     }
+//   }
+
+//   if (currentHint.id === ) {
+//     selectionChoiceRow1.forEach(function (color, index) {
+//       if (currentHint[i] === secretCode[i]) {
+//         currentHint.classList.add("black");
+//       } else {
+//         currentHint.classList.add("white");
+//       }
+//     });
+//   }
+//   if (currentHint.id === "hint-3") {
+//     currentHint.classList.add("black");
+//   }
+//   if (currentHint.id === "hint-4") {
+//     currentHint.classList.add("black");

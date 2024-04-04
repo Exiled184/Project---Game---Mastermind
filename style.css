@@ -57,7 +57,7 @@
   align-items: center;
 }
 
-.row-number {
+.row_number {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   grid-column-start: 2;
