@@ -10,9 +10,8 @@ const yellowButton = document.querySelector("button.yellow");
 const greenButton = document.querySelector("button.green");
 const orangeButton = document.querySelector("button.orange");
 const purpleButton = document.querySelector("button.purple");
-// boardState[currentRowNumber].hint = getHintColorArray(rowChoiceArray);
-// answer - hint[ "grey","black","black","white"]
-const boardState = [
+
+let boardState = [
   { row_number: 1, choice: [], hint: [] },
   { row_number: 2, choice: [], hint: [] },
   { row_number: 3, choice: [], hint: [] },
@@ -24,10 +23,24 @@ const boardState = [
   { row_number: 9, choice: [], hint: [] },
   { row_number: 10, choice: [], hint: [] },
 ];
+
+const emptyBoardState = [
+  { row_number: 1, choice: [], hint: [] },
+  { row_number: 2, choice: [], hint: [] },
+  { row_number: 3, choice: [], hint: [] },
+  { row_number: 4, choice: [], hint: [] },
+  { row_number: 5, choice: [], hint: [] },
+  { row_number: 6, choice: [], hint: [] },
+  { row_number: 7, choice: [], hint: [] },
+  { row_number: 8, choice: [], hint: [] },
+  { row_number: 9, choice: [], hint: [] },
+  { row_number: 10, choice: [], hint: [] },
+];
+
 const answerState = generateSecretCode(colors);
 /*----- state variables -----*/
-
 let currentRowNumber = 0;
+const initalRowNumber = 0;
 /*----- cached elements  -----*/
 
 /*----- event listeners -----*/
@@ -57,7 +70,7 @@ function renderBoard(gameBoard) {
   board.innerHTML = "";
 
   //   HTML for rendering the guesses
-  gameBoard.forEach(function (row) {
+  gameBoard.forEach(function (row, rowIndex) {
     const rowDiv = document.createElement("div");
     rowDiv.classList.add("row");
 
@@ -69,7 +82,7 @@ function renderBoard(gameBoard) {
     hintContainer.classList.add("hint");
 
     const rowNumberDiv = document.createElement("div");
-    rowNumberDiv.textContent = row.row_number;
+    rowNumberDiv.textContent = rowIndex + 1;
     rowNumberContainer.append(rowNumberDiv);
 
     for (let i = 0; i < 4; i++) {
@@ -106,15 +119,14 @@ function renderBoard(gameBoard) {
 
   board.append(secretContainer);
 }
-
+// HTML for adding the choosing the colours
 function addColor(color) {
   const rowChoiceArray = boardState[currentRowNumber].choice;
   rowChoiceArray.push(color);
   if (rowChoiceArray.length === 4) {
     boardState[currentRowNumber].hint = getHintColorArray(rowChoiceArray);
+    checkResult(getHintColorArray(rowChoiceArray));
     currentRowNumber++;
-    console.log(JSON.stringify(boardState));
-    console.log(answerState);
   }
   renderBoard(boardState);
 }
@@ -143,7 +155,6 @@ renderBoard(boardState);
 // initalisation
 window.onload = function () {
   // instructions();//
-  // startGame()
   console.log("--->", answerState);
 };
 
@@ -163,11 +174,51 @@ function randomColor(colors) {
 }
 
 // restart button
-document.querySelector(".restart").addEventListener("click", handleRestart);
+const restartButton = document.querySelector(".restart");
+restartButton.addEventListener("click", handleRestart);
 
 function handleRestart() {
   secretCode = generateSecretCode(colors);
   console.log(secretCode);
+  clearBoard();
+  console.log(boardState);
+}
+
+function clearBoard() {
+  boardState = emptyBoardState;
+  currentRowNumber = initalRowNumber;
+  renderBoard(boardState);
+}
+
+// check winner
+
+function checkResult(rowHintArray) {
+  console.log(boardState);
+  console.log(rowHintArray);
+  console.log(currentRowNumber);
+  if (
+    rowHintArray.length === 4 &&
+    rowHintArray[0] === "black" &&
+    rowHintArray[1] === "black" &&
+    rowHintArray[2] === "black" &&
+    rowHintArray[3] === "black"
+  ) {
+    console.log("you win");
+    return;
+  } else if (
+    rowHintArray.length === 4 &&
+    (rowHintArray[0] !== "black" ||
+      rowHintArray[1] !== "black" ||
+      rowHintArray[2] !== "black" ||
+      rowHintArray[3] !== "black") &&
+    currentRowNumber === 9
+  ) {
+    console.log("you lose");
+  }
+}
+
+function endGame() {
+  gameOver;
 }
 
 // instruction button
@@ -176,14 +227,3 @@ function handleRestart() {
 // function handleInstructions(){
 // 	let instruction = document.getElement
 // }
-
-// clicking the colour buttons returns the colour
-// const buttonSelector = document.querySelectorAll(".color-buttons button");
-
-// buttonSelector.forEach(function (button) {
-//   button.addEventListener("click", function () {
-//     selectColor(button.id);
-//   });
-// });
-
-// clicking the color buttons fills the arrays
