@@ -43,7 +43,7 @@ JavaScript, HTML, CSS
 
 # Getting started:
 
-https://github.com/Exiled184/Project---Game---Mastermind
+https://exiled184.github.io/Project---Game---Mastermind/
 
 # Stories:
 
