@@ -13,10 +13,9 @@ const purpleButton = document.querySelector("button.purple");
 
 let boardState = getEmptyBoardState();
 
-const answerState = generateSecretCode(colors);
+let answerState = generateSecretCode(colors);
 /*----- state variables -----*/
 let currentRowNumber = 0;
-const initalRowNumber = 0;
 
 function getEmptyBoardState() {
   return [
@@ -166,18 +165,22 @@ function randomColor(colors) {
 
 // restart button
 const restartButton = document.querySelector(".restart");
+console.log(restartButton);
 restartButton.addEventListener("click", handleRestart);
 
 function handleRestart() {
-  secretCode = generateSecretCode(colors);
-  console.log(secretCode);
+  console.log("handleRestart");
+  winScreen.style.display = "none";
+  loseScreen.style.display = "none";
+  answerState = generateSecretCode(colors);
+  console.log(answerState);
   clearBoard();
   console.log(boardState);
 }
 
 function clearBoard() {
   boardState = getEmptyBoardState();
-  currentRowNumber = initalRowNumber;
+  currentRowNumber = 0;
   renderBoard(boardState);
 }
 
@@ -194,7 +197,11 @@ function checkResult(rowHintArray) {
     rowHintArray[2] === "black" &&
     rowHintArray[3] === "black"
   ) {
-    alert("You win!");
+    // alert("You win!");
+    winScreen.style.display = "block";
+    const win = document.getElementById("win");
+    console.log(win);
+    win.addEventListener("click", handleRestart);
     clearBoard();
     return;
   } else if (
@@ -205,7 +212,9 @@ function checkResult(rowHintArray) {
       rowHintArray[3] !== "black") &&
     currentRowNumber === 9
   ) {
-    alert("You lose!");
+    loseScreen.style.display = "block";
+    const loss = document.getElementById("loss");
+    loss.addEventListener("click", handleRestart);
     clearBoard();
   }
 }
@@ -214,15 +223,12 @@ function endGame() {
   gameOver;
 }
 
-// instruction button
-// document.querySelector(".instructions").addEventListener("click",handleInstructions);
-
-// function handleInstructions(){
-// 	let instruction = document.getElement
-// }
 const btn = document.getElementById("instruction");
 const span = document.getElementsByClassName("close")[0];
 const modal = document.getElementById("helpMe");
+const winScreen = document.getElementById("winScreen");
+const loseScreen = document.getElementById("loseScreen");
+
 // Open the modal
 btn.onclick = function () {
   modal.style.display = "block";
