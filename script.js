@@ -11,36 +11,27 @@ const greenButton = document.querySelector("button.green");
 const orangeButton = document.querySelector("button.orange");
 const purpleButton = document.querySelector("button.purple");
 
-let boardState = [
-  { row_number: 1, choice: [], hint: [] },
-  { row_number: 2, choice: [], hint: [] },
-  { row_number: 3, choice: [], hint: [] },
-  { row_number: 4, choice: [], hint: [] },
-  { row_number: 5, choice: [], hint: [] },
-  { row_number: 6, choice: [], hint: [] },
-  { row_number: 7, choice: [], hint: [] },
-  { row_number: 8, choice: [], hint: [] },
-  { row_number: 9, choice: [], hint: [] },
-  { row_number: 10, choice: [], hint: [] },
-];
-
-const emptyBoardState = [
-  { row_number: 1, choice: [], hint: [] },
-  { row_number: 2, choice: [], hint: [] },
-  { row_number: 3, choice: [], hint: [] },
-  { row_number: 4, choice: [], hint: [] },
-  { row_number: 5, choice: [], hint: [] },
-  { row_number: 6, choice: [], hint: [] },
-  { row_number: 7, choice: [], hint: [] },
-  { row_number: 8, choice: [], hint: [] },
-  { row_number: 9, choice: [], hint: [] },
-  { row_number: 10, choice: [], hint: [] },
-];
+let boardState = getEmptyBoardState();
 
 const answerState = generateSecretCode(colors);
 /*----- state variables -----*/
 let currentRowNumber = 0;
 const initalRowNumber = 0;
+
+function getEmptyBoardState() {
+  return [
+    { row_number: 1, choice: [], hint: [] },
+    { row_number: 2, choice: [], hint: [] },
+    { row_number: 3, choice: [], hint: [] },
+    { row_number: 4, choice: [], hint: [] },
+    { row_number: 5, choice: [], hint: [] },
+    { row_number: 6, choice: [], hint: [] },
+    { row_number: 7, choice: [], hint: [] },
+    { row_number: 8, choice: [], hint: [] },
+    { row_number: 9, choice: [], hint: [] },
+    { row_number: 10, choice: [], hint: [] },
+  ];
+}
 /*----- cached elements  -----*/
 
 /*----- event listeners -----*/
@@ -185,7 +176,7 @@ function handleRestart() {
 }
 
 function clearBoard() {
-  boardState = emptyBoardState;
+  boardState = getEmptyBoardState();
   currentRowNumber = initalRowNumber;
   renderBoard(boardState);
 }
@@ -203,7 +194,8 @@ function checkResult(rowHintArray) {
     rowHintArray[2] === "black" &&
     rowHintArray[3] === "black"
   ) {
-    console.log("you win");
+    alert("You win!");
+    clearBoard();
     return;
   } else if (
     rowHintArray.length === 4 &&
