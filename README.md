@@ -43,7 +43,7 @@ JavaScript, HTML, CSS
 
 # Getting started:
 
-Link for game TBA
+[v](https://github.com/Exiled184/Project---Game---Mastermind)
 
 # Stories:
 
