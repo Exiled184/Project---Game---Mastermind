@@ -164,7 +164,7 @@ function randomColor(colors) {
 }
 
 // restart button
-const restartButton = document.querySelector(".restart");
+const restartButton = document.querySelector("#originalRestart");
 console.log(restartButton);
 restartButton.addEventListener("click", handleRestart);
 
