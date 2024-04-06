@@ -205,7 +205,8 @@ function checkResult(rowHintArray) {
       rowHintArray[3] !== "black") &&
     currentRowNumber === 9
   ) {
-    console.log("you lose");
+    alert("You lose!");
+    clearBoard();
   }
 }
 
@@ -219,3 +220,15 @@ function endGame() {
 // function handleInstructions(){
 // 	let instruction = document.getElement
 // }
+const btn = document.getElementById("instruction");
+const span = document.getElementsByClassName("close")[0];
+const modal = document.getElementById("helpMe");
+// Open the modal
+btn.onclick = function () {
+  modal.style.display = "block";
+};
+
+// Close the modal
+span.onclick = function () {
+  modal.style.display = "none";
+};

@@ -10,7 +10,31 @@
     <div class="container">
       <div class="top">
         <div class="heading">MASTERMIND</div>
-        <button class="instructions" onclick="instructionsHandler()">i</button>
+        <input id="instruction" type="button" value="i"/>
+        <div id="helpMe" class="modal">
+            <div class="modal-content">
+              <div class="modal-container">
+                <span class="close">&times;</span>
+                <p>
+                    Mastermind is a code guessing game, where a secret four coloured code is randomly generated and the player is tasked to guess the secret code.</br>
+
+                    The player will have ten attempts to guess the code, in which up to four white/black/no coloured pegs will appear after each submission.</br>
+                    The black peg denotes a colour is correct and location is correct;</br>
+                    white peg denotes a colour is correct and the location is incorrect;</br>
+                    or
+                    no colour peg denotes a colour is incorrect</br>
+                    
+                    Note that location of the pegs do not denote the location of a colour choice eg the second peg represents the second location in the sequence</br>
+                    
+                    Upon four black pegs, the secret code would be revealed and the player will win the game.</br>
+                    Failure to guess correct secret code after ten attempts and the player will lose the game.</p>
+              </div>
+              </div>
+          </div>
+
+
+
+
       </div>
       <div class="board"></div>
     <footer>
